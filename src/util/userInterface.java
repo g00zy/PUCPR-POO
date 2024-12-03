@@ -113,6 +113,26 @@ public class userInterface implements Serializable
         }
     }
 
+    public boolean checkValue(double value) throws valueIsLessThanZeroException, ValueIsEqualToZeroException
+    {   
+        boolean flag;
+        if (value < 0)
+        {
+            flag = false;
+            throw new valueIsLessThanZeroException();
+        }
+        else if (value == 0)
+        {
+            flag = false;
+            throw new ValueIsEqualToZeroException();
+        }
+        else
+        {
+            flag = true;
+        }
+        return flag;
+    }
+
     public double userPropertyValue() throws IOException, InterruptedException
     {
         double value = 0;
@@ -126,22 +146,7 @@ public class userInterface implements Serializable
                 clearConsole.cleanConsole();
                 System.out.println("Qual o valor do seu imóvel? ");
                 value = Double.parseDouble(scanner.nextLine());
-                if (value < 0)
-                {
-                    clearConsole.cleanConsole();
-                    System.out.println("Valor do imóvel inválido. Use apenas números positivos.");
-                    Thread.sleep(1700);
-                }
-                else if (value == 0)
-                {
-                    clearConsole.cleanConsole();
-                    System.out.println("O valor do imóvel deve ser maior do que zero.");
-                    Thread.sleep(1700);
-                }
-                if (value > 0)
-                {
-                    flag = true;
-                }
+                flag = checkValue(value);
             }
             catch (InputMismatchException exception) // catch an exception if the user inputs anything besides double
             {
@@ -154,6 +159,13 @@ public class userInterface implements Serializable
             {
                 clearConsole.cleanConsole();
                 System.out.println("Valor inválido. Use apenas números.");
+                flag = false;
+                Thread.sleep(1700);
+            }
+            catch (valueIsLessThanZeroException | ValueIsEqualToZeroException exception)
+            {
+                clearConsole.cleanConsole();
+                System.out.println("Valor inválido. Utilize números maiores do que zero.");
                 flag = false;
                 Thread.sleep(1700);
             }
@@ -173,28 +185,7 @@ public class userInterface implements Serializable
                     clearConsole.cleanConsole();
                     System.out.println("Qual o prazo do seu financiamento em anos? ");
                     value = Integer.parseInt(scanner.nextLine());
-                    if (value < 0)
-                    {
-                        clearConsole.cleanConsole();
-                        System.out.println("Prazo inválido. Use apenas números positivos.");
-                        Thread.sleep(1700);
-                    }
-                    else if (value == 0)
-                    {
-                        clearConsole.cleanConsole();
-                        System.out.println("O prazo do financiamento deve ser maior do que zero.");
-                        Thread.sleep(1700);
-                    }
-                    else if (value > 35)
-                    {
-                        clearConsole.cleanConsole();
-                        System.out.println("O prazo máximo de financiamento é de 35 anos.");
-                        Thread.sleep(1700);
-                    }
-                    if (value > 0 && value <= 35)
-                    {
-                        flag = true;
-                    }
+                    flag = checkValue(value);
                 }
                 catch (InputMismatchException inputMismatchException) // catch an exception if the user inputs anything besides an int
                 {
@@ -207,6 +198,13 @@ public class userInterface implements Serializable
                     clearConsole.cleanConsole();
                     System.out.println("Valor inválido. Use apenas números inteiros.");
                     Thread.sleep(1700);
+                }
+                catch (valueIsLessThanZeroException | ValueIsEqualToZeroException exception)
+                {
+                clearConsole.cleanConsole();
+                System.out.println("Valor inválido. Utilize números maiores do que zero.");
+                flag = false;
+                Thread.sleep(1700);
                 }
             }
             return value;
@@ -224,28 +222,7 @@ public class userInterface implements Serializable
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Qual a taxa de júros anual? ");
                 value = Double.parseDouble(scanner.nextLine());
-                if (value < 0)
-                {
-                    clearConsole.cleanConsole();
-                    System.out.println("Taxa de júros inválida. Use apenas números positivos.");
-                    Thread.sleep(1700);
-                }
-                else if (value == 0)
-                {
-                    clearConsole.cleanConsole();
-                    System.out.println("A taxa de júros anual deve ser maior do que zero.");
-                    Thread.sleep(1700);
-                }
-                else if (value > 12)
-                {
-                    clearConsole.cleanConsole();
-                    System.out.println("A taxa de júros anual máxima é de 12%.");
-                    Thread.sleep(1700);
-                }
-                if (value > 0 && value <= 12)
-                {
-                    flag = true;
-                }
+                flag = checkValue(value);
             }
             catch (InputMismatchException exception)
             {
@@ -257,6 +234,13 @@ public class userInterface implements Serializable
             {
                 clearConsole.cleanConsole();
                 System.out.println("Valor inválido. Use apenas números."); // when the first exception occurs the parseDouble function will try to format the faulty string anyway, so this catch fixes that
+                Thread.sleep(1700);
+            }
+            catch (valueIsLessThanZeroException | ValueIsEqualToZeroException exception)
+            {
+                clearConsole.cleanConsole();
+                System.out.println("Valor inválido. Utilize números maiores do que zero.");
+                flag = false;
                 Thread.sleep(1700);
             }
         }

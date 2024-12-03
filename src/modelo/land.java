@@ -10,7 +10,7 @@ public class land extends financing implements Serializable
     private String typeOfLand;
     private userInterface user = new userInterface();
     
-    public land() throws IOException, InterruptedException 
+    public land() throws IOException, InterruptedException
     {
         user.aditionalParameters("terreno");
         this.propertyValue = user.userPropertyValue();

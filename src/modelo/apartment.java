@@ -12,7 +12,7 @@ public class apartment extends financing implements Serializable
     private int apartmentFloor;
     private userInterface user = new userInterface();
 
-    public apartment() throws IOException, InterruptedException 
+    public apartment() throws IOException, InterruptedException
     {
         user.aditionalParameters("apartamento");
         this.propertyValue = user.userPropertyValue();

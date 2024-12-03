@@ -3,7 +3,7 @@ package modelo;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.DecimalFormat;
-import util.userInterface;
+import util.*;
 
 public class house extends financing implements Serializable
 {
@@ -35,9 +35,27 @@ public class house extends financing implements Serializable
         return string.toString();
     }
 
+    private void interestIsBiggerThanInitialTax(double MonthlyInterestValue, double initialTaxValue) throws interestIsBiggerThanInitialTaxException
+    {
+        if (initialTaxValue > MonthlyInterestValue)
+        {
+            throw new interestIsBiggerThanInitialTaxException("Interest value is less than the initial tax value of 80.");
+        }
+    } 
+    
     public double calculateMonthlyPayment()
     {
-        return (this.propertyValue / (this.financingDeadline * 12)) * (1 + (this.annualInterestRate / 12)) + 80;
+        double initialTaxValue = 80;
+        double monthlyTax = ((this.propertyValue / (this.financingDeadline * 12)) * (1 + (this.annualInterestRate / 12)) + initialTaxValue) - this.propertyValue;
+        try
+        {
+            interestIsBiggerThanInitialTax(monthlyTax, initialTaxValue);
+        }
+        catch (interestIsBiggerThanInitialTaxException exception)
+        {
+            initialTaxValue = monthlyTax;
+        }
+        return (this.propertyValue / (this.financingDeadline * 12)) * (1 + (this.annualInterestRate / 12)) + initialTaxValue;
     }
     
     public double calculateTotalPayment()
