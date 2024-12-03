@@ -1,7 +1,9 @@
 package util;
-import java.io.IOException;
 
-public class clearScreen 
+import java.io.IOException;
+import java.io.Serializable;
+
+public class clearScreen implements Serializable
 {
     private final String operatinglSystem = System.getProperty("os.name");
     public void cleanConsole() throws IOException, InterruptedException

@@ -1,15 +1,123 @@
 package util;
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class userInterface
+public class userInterface implements Serializable
 {
+    private clearScreen clearConsole = new clearScreen();
+    private double houseAreaSize;
+    private double landAreaSize;
+    private int numberOfGarages;
+    private int apartmentNumber;
+    private int apartmentFloor;
+    private String typeOfLand;
+
+    public double getHouseAreaSize()
+    {
+        return this.houseAreaSize;
+    }
+    public double getLandAreaSize()
+    {
+        return this.landAreaSize;
+    }
+    public int getNumberOfGarages()
+    {
+        return this.numberOfGarages;
+    }
+    public int getApartmentNumber()
+    {
+        return this.apartmentNumber;
+    }
+    public int getApartmentFloor()
+    {
+        return this.apartmentFloor;
+    }
+    public String getTypeOfLand()
+    {
+        return this.typeOfLand;
+    }
+
+    public void aditionalParameters(String type) throws IOException, InterruptedException
+    {   
+        Scanner scanner = new Scanner(System.in);
+        boolean flag = false;
+
+        while (!flag)
+        {
+
+            if (type.equalsIgnoreCase("casa"))
+            {  
+                try
+                {
+                    clearConsole.cleanConsole();
+                    System.out.println("Qual o tamanho da área construída em metros quadrados? ");
+                    this.houseAreaSize = Double.parseDouble(scanner.nextLine());
+                    clearConsole.cleanConsole();
+                    System.out.println("Qual o tamanho do terreno em metros quadrados? ");
+                    this.landAreaSize = Double.parseDouble(scanner.nextLine());
+                    flag = true;
+                }
+                catch (InputMismatchException | NumberFormatException exception) // catch an exception if the user inputs anything besides the right type
+                {                                                                // when the first exception occurs the parse function will try to format the faulty string anyway, so this catch fixes that
+                    clearConsole.cleanConsole();
+                    System.out.println("Valor inválido.");
+                    flag = false;
+                    Thread.sleep(1700);
+                }
+            }
+    
+            if (type.equalsIgnoreCase("apartamento"))
+            {
+                try
+                {
+                    clearConsole.cleanConsole();
+                    System.out.println("Quantas garagens tem o apartamento? ");
+                    this.numberOfGarages = Integer.parseInt(scanner.nextLine());
+                    clearConsole.cleanConsole();
+                    System.out.println("Qual o número do apartamento? ");
+                    this.apartmentNumber = Integer.parseInt(scanner.nextLine());
+                    clearConsole.cleanConsole();
+                    System.out.println("Qual o andar do apartamento? ");
+                    this.apartmentFloor = Integer.parseInt(scanner.nextLine());
+                    flag = true;
+                }
+                catch (InputMismatchException | NumberFormatException exception) // catch an exception if the user inputs anything besides the right type
+                {                                                                // when the first exception occurs the parse function will try to format the faulty string anyway, so this catch fixes that
+                    clearConsole.cleanConsole();
+                    System.out.println("Valor inválido.");
+                    flag = false;
+                    Thread.sleep(1700);
+                }
+            }
+
+            if (type.equalsIgnoreCase("terreno"))
+            {
+                try
+                {
+                    clearConsole.cleanConsole();
+                    System.out.println("Qual o tipo do terreno (Residencial ou Comercial)? ");
+                    this.typeOfLand = scanner.nextLine();
+                    flag = true;
+                }
+                catch (InputMismatchException | NumberFormatException exception) 
+                {
+                    clearConsole.cleanConsole();
+                    System.out.println("Valor inválido.");
+                    flag = false;
+                    Thread.sleep(1700);
+                }
+            }
+        }
+    }
+
     public double userPropertyValue() throws IOException, InterruptedException
     {
-        clearScreen clearConsole = new clearScreen();
         double value = 0;
         boolean flag = false;
+
         while (!flag)
         {
             Scanner scanner = new Scanner(System.in);
@@ -32,10 +140,7 @@ public class userInterface
                 }
                 if (value > 0)
                 {
-                    clearConsole.cleanConsole();
-                    System.out.println("O valor do imóvel foi registrado.");
                     flag = true;
-                    Thread.sleep(1000);
                 }
             }
             catch (InputMismatchException exception) // catch an exception if the user inputs anything besides double
@@ -58,7 +163,6 @@ public class userInterface
     
     public int userFinancingDeadline() throws IOException, InterruptedException
         {
-            clearScreen clearConsole = new clearScreen();
             int value = 0;
             boolean flag = false;
             while (!flag)
@@ -89,10 +193,7 @@ public class userInterface
                     }
                     if (value > 0 && value <= 35)
                     {
-                        clearConsole.cleanConsole();
-                        System.out.println("Prazo de financiamento registrado.");
                         flag = true;
-                        Thread.sleep(1000);
                     }
                 }
                 catch (InputMismatchException inputMismatchException) // catch an exception if the user inputs anything besides an int
@@ -113,7 +214,6 @@ public class userInterface
     
     public double userAnnualInterest() throws IOException, InterruptedException
     {
-        clearScreen clearConsole = new clearScreen();
         double value = 0;
         boolean flag = false;
         while(!flag)
@@ -144,10 +244,7 @@ public class userInterface
                 }
                 if (value > 0 && value <= 12)
                 {
-                    clearConsole.cleanConsole();
-                    System.out.println("Taxa de júros anual registrada.");
                     flag = true;
-                    Thread.sleep(1000);
                 }
             }
             catch (InputMismatchException exception)

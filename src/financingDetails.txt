@@ -1,0 +1,3 @@
+Valor da Propriedade: R$ 1,00 | Valor do Financiamento: R$ 1,02 | Valor da Parcela: R$ 0,09 | Júros Anual: 1.0% | Tempo de Financiamento: 1 Anos | Tipo de Terreno: 1 | 
+Valor da Propriedade: R$ 1,00 | Valor do Financiamento: R$ 961,00 | Valor da Parcela: R$ 80,08 | Júros Anual: 1.0% | Tempo de Financiamento: 1 Anos | Área Construída: 1,00 mm² | Área Construída: 1,00 mm² | 
+Valor da Propriedade: R$ 1,00 | Valor do Financiamento: R$ 100,54 | Valor da Parcela: R$ 8,38 | Júros Anual: 1.0% | Tempo de Financiamento: 1 Anos | Andar do Apartamento: 1 | Número do Apartamento: 1 | Quantidade de Garagens: 1 | 
